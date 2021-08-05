@@ -21,3 +21,5 @@ const ProjectSchema = new Schema({
     type: [String],
   },
 });
+
+module.exports = Project = mongoose.model('project', ProjectSchema);

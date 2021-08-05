@@ -1,11 +1,16 @@
 const express = require('express');
 const project = require('./routes/project');
+const connect = require('./config/db');
 
-const PORT = 5000;
+const PORT = 4000;
 
 const app = express();
+connect();
 
-app.listen(PORT, () => console.log('App is listening on port 5000'));
+// body parser
+app.use(express.json({ extended: false }));
+
+app.listen(PORT, () => console.log(`App is listening on port ${PORT}`));
 
 app.use('/api/projects', project);
 
