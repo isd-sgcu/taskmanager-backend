@@ -63,7 +63,9 @@ router.delete('/:id', async (req, res) => {
 // get all tasks in a project
 router.get('/:id/tasks', async (req, res) => {
   try {
-    const tasks = Task.find({ project: req.params.id }).sort({ date: -1 });
+    const tasks = await Task.find({ project: req.params.id }).sort({
+      date: -1,
+    });
     res.json(tasks);
   } catch (err) {
     console.log(err);
@@ -74,7 +76,7 @@ router.get('/:id/tasks', async (req, res) => {
 // get one task
 router.get('/:id/tasks/:taskId', async (req, res) => {
   try {
-    const task = Task.find({ _id: req.params.taskId });
+    const task = await Task.findOne({ _id: req.params.taskId });
     res.json(task);
   } catch (err) {
     console.log(err);
@@ -88,7 +90,7 @@ router.post('/:id/tasks', async (req, res) => {
   input.project = req.params.id; // or maybe get project id from frontend state instead
   try {
     const task = new Task(input);
-    await task.send();
+    await task.save();
     res.send('Task added');
   } catch (err) {
     console.log(err);

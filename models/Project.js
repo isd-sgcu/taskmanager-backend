@@ -17,9 +17,17 @@ const ProjectSchema = new Schema({
   status: {
     type: String,
   },
-  tasks: {
-    type: [String],
-  },
+  // don't think tasks array is necessary here anymore
+  // tasks: [
+  //   {
+  //     id: {
+  //       type: String,
+  //     },
+  //     name: {
+  //       type: String,
+  //     },
+  //   },
+  // ],
 });
 
 module.exports = Project = mongoose.model('project', ProjectSchema);
