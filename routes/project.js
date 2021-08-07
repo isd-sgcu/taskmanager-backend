@@ -102,13 +102,24 @@ router.post('/:id/tasks', async (req, res) => {
   }
 });
 
+// update task
+router.post('/:id/tasks/:taskId/', async (req, res) => {
+  try {
+    await Task.findByIdAndUpdate(req.params.taskId, req.body);
+    res.send('Task updated');
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Server error');
+  }
+});
+
 // update task (add commit)
-router.post('/:id/tasks/:taskId', async (req, res) => {
+router.post('/:id/tasks/:taskId/update', async (req, res) => {
   try {
     const task = await Task.findOne({ _id: req.params.taskId });
     task.updates.push(req.body); // push update object into the array
     await task.save();
-    res.send('Task updated');
+    res.send('Task update added');
   } catch (err) {
     console.log(err);
     res.status(500).send('Server error');
