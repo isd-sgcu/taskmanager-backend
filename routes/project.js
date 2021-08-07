@@ -6,7 +6,10 @@ const Task = require('../models/Task');
 // get all projects
 router.get('/', async (req, res) => {
   try {
-    const projects = await Project.find();
+    const projects = await Project.find().sort({
+      status: -1,
+      start: -1,
+    });
     res.json(projects);
   } catch (err) {
     console.log(err);
@@ -64,7 +67,8 @@ router.delete('/:id', async (req, res) => {
 router.get('/:id/tasks', async (req, res) => {
   try {
     const tasks = await Task.find({ project: req.params.id }).sort({
-      date: -1,
+      status: -1,
+      start: -1,
     });
     res.json(tasks);
   } catch (err) {

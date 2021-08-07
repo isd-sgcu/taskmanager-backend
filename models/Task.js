@@ -12,7 +12,7 @@ const TaskSchema = new Schema({
     type: String,
   },
   members: {
-    type: [String],
+    type: [{ name: String, role: String }],
   },
   start: {
     type: Date,
@@ -25,6 +25,9 @@ const TaskSchema = new Schema({
   },
   updates: {
     type: [String],
+    // type: [
+    //   { name: String, member: { name: String, role: String }, message: String },
+    // ],
   },
 });
 

@@ -9,7 +9,7 @@ const ProjectSchema = new Schema({
     type: String,
   },
   members: {
-    type: [String],
+    type: [{ name: String, role: String }],
   },
   start: {
     type: Date,
