@@ -24,7 +24,7 @@ const TaskSchema = new Schema({
     type: String, // pending, ongoing, finished
   },
   updates: {
-    type: [String],
+    type: [{ message: String, member: String }],
     // type: [
     //   { name: String, member: { name: String, role: String }, message: String },
     // ],

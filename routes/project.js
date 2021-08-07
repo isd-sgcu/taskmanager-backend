@@ -56,6 +56,7 @@ router.post('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     await Project.findOneAndDelete(req.params.id);
+    await Task.deleteMany({ project: req.params.id });
     res.send('Project deleted');
   } catch (err) {
     console.log(err);
@@ -117,7 +118,7 @@ router.post('/:id/tasks/:taskId/', async (req, res) => {
 router.post('/:id/tasks/:taskId/update', async (req, res) => {
   try {
     const task = await Task.findOne({ _id: req.params.taskId });
-    task.updates.push(req.body); // push update object into the array
+    task.updates.unshift(req.body); // push update object into the array
     await task.save();
     res.send('Task update added');
   } catch (err) {
